@@ -34,3 +34,9 @@ html {
 .header-text {
     font-size: 2rem;
 }
+
+main {
+    display: flex;
+    justify-content: space-between;
+}
+
