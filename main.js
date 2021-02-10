@@ -6,6 +6,9 @@ const secondPageContainer = document.querySelector(".second-page-container")
 const addTransaction = document.querySelector(".add-transaction")
 const styleWhite = document.querySelector(".style-white")
 const styleDark = document.querySelector(".style-dark")
+const revenuesList = document.querySelector("#revenuesList")
+const expensesList = document.querySelector("#expensesList")
+
 
 let editMode = false
 
@@ -32,10 +35,14 @@ const transactionOptions = {
     }]
 }
 
+const transactions = {
+    expenses:[{type: "kredyt", amount: 700}, {type: "shopping", amount: 200}],
+    revenues:[{type: "wypłata", amount: 2700}, {type: "stypendium", amount: 700}]
+}
 
-
-function clearSelect() {
-    transactionKindSelect.querySelectorAll('option').forEach(option => option.remove())
+ 
+function removeChildren(parent, selector) {
+    parent.querySelectorAll(selector).forEach(child => child.remove())
 }
 const setOptions = () => {
     const transactionType = transactionTypeSelect.value;
@@ -46,7 +53,8 @@ const setOptions = () => {
         newOption.value = option.en;
         transactionKindSelect.appendChild(newOption);
     }
-    clearSelect()
+    // clearSelect()
+    removeChildren(transactionKindSelect, 'option')
     switch (transactionType) {
         case "revenue":
             transactionOptions.revenue.forEach(option => {
@@ -64,8 +72,6 @@ const setOptions = () => {
     }
 }
 setOptions()
-
-
 function showAddTransaction() {
     function add() {
         firstPageContainer.classList.add('opaque')
@@ -87,7 +93,6 @@ const hideAddTransaction = () => {
     document.removeEventListener('click', detectClickOutsideSecondContainer)
 }
 
-transactionTypeSelect.addEventListener('change', setOptions)
 
 function detectClickOutsideSecondContainer(e) {
     if (!editMode) return
@@ -100,10 +105,31 @@ function detectClickOutsideSecondContainer(e) {
     if (!classList.includes('second-page-container')) hideAddTransaction()
 }
 
+function renderTransactions(){
+    function createLi(type, amount){
+        const newLi  = document.createElement('li')
+        newLi.classList.add("transaction-list-element")
+        newLi.innerHTML = `<i class="fas fa-money-bill-wave-alt"></i> <span>${type}</span> <span>Wartość: </span><span>${amount}</span>`
+        return newLi
+    }
+    removeChildren(expensesList, 'li')
+    removeChildren(revenuesList, 'li')
 
+    transactions.expenses.forEach(el=>{
+        const newLi = createLi(el.type, el.amount)
+        expensesList.appendChild(newLi)
+    })
+    transactions.revenues.forEach(el=>{
+        const newLi = createLi(el.type, el.amount)
+        revenuesList.appendChild(newLi)
+    })
+}
+
+renderTransactions()
+
+transactionTypeSelect.addEventListener('change', setOptions)
 
 addTransaction.addEventListener('click', showAddTransaction)
-
 
 styleWhite.addEventListener('click', () => {
     setTimeout(() => {
