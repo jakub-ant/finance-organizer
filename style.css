@@ -4,6 +4,7 @@
     --font-color: rgb(24, 20, 20);
     --background-color: rgb(236, 236, 225);
 }
+
 html {
     box-sizing: border-box;
 
@@ -12,6 +13,7 @@ html {
     color: var(--font-color);
     background-color: var(--background-color);
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -20,6 +22,10 @@ html {
 .first-page-container {
     max-width: 1000px;
     margin: 0 auto;
+}
+
+.scalable:hover {
+    transform: scale(1.1);
 }
 
 .header {
@@ -40,3 +46,84 @@ main {
     justify-content: space-between;
 }
 
+.transactions,
+.account {
+    padding: 2rem;
+}
+
+.transactions h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 0 0 2rem 0;
+}
+
+.transactions-fields {
+    display: flex;
+    justify-content: space-between;
+}
+
+.revenues,
+.expenses {
+    font-size: 1.5rem;
+    border: var(--font-color) 1px solid;
+    padding: 1rem 3rem;
+}
+
+.revenues {
+    margin: 0 2rem 0 0;
+}
+
+.account {
+    border: var(--font-color) 1px solid;
+
+}
+
+.account h3 {
+    padding: 0 0 2rem;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.account h5 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+
+.transaction-actions {
+    margin: 2rem 0;
+    font-size: 2rem;
+    display: flex;
+}
+
+.add-transaction,
+.delete-all {
+    padding: 1rem;
+    border: var(--font-color) 1px solid;
+}
+
+.add-transaction {
+    margin: 0 2rem 0 0;
+}
+
+.style {
+    display: flex;
+    justify-content: center;
+}
+
+.circle {
+    width: 6rem;
+    height: 6rem;
+    border: var(--font-color) 1px solid;
+    border-radius: 50%;
+cursor: pointer;}
+
+
+
+.style-white {
+    margin: 0 3rem 0 0;
+}
+
+.style-dark {
+    background-color: var(--font-color);
+}
