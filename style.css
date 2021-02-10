@@ -83,12 +83,16 @@ main {
 }
 
 .revenues {
-    margin: 0 2rem 0 0;
+    margin: 0 1rem 0 0;
+}
+
+.transaction-list-element {
+    font-size: 2rem;
+    list-style: none;
 }
 
 .account {
     border: var(--font-color) 1px solid;
-
 }
 
 .account h3 {
