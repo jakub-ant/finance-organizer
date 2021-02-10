@@ -3,11 +3,11 @@
     --font-size: 10px;
     --font-color: rgb(24, 20, 20);
     --background-color: rgb(236, 236, 225);
+    --darkened-background-color: rgb(152, 152, 150)
 }
 
 html {
     box-sizing: border-box;
-
     font-family: var(--font-family);
     font-size: var(--font-size);
     color: var(--font-color);
@@ -24,8 +24,21 @@ html {
     margin: 0 auto;
 }
 
+.scalable {
+    transition: 0.2s;
+}
+
 .scalable:hover {
     transform: scale(1.1);
+    cursor: pointer;
+}
+
+.darken {
+    transition: 0.2s;
+
+}
+.darken:hover {
+    background-color: var(--darkened-background-color);   
 }
 
 .header {
@@ -116,7 +129,7 @@ main {
     height: 6rem;
     border: var(--font-color) 1px solid;
     border-radius: 50%;
-cursor: pointer;}
+}
 
 
 
