@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="first-page-container">
+    <div class="first-page-container"  >
         <header class="header">
             <div class="header-logo">
                 <h1> <i class="fas fa-wallet"></i> Menadżer finansów</h1>        </div>
@@ -45,7 +45,7 @@
                 <h5><span>0</span> PLN</h5>
                 <div class="user-panel">
                     <div class="transaction-actions">
-                        <div class="add-transaction scalable darken">
+                        <div class="add-transaction scalable darken" onclick="" >
                             <p>+ Dodaj tranzakcję</p>
                         </div>
                         <div class="delete-all scalable darken">
@@ -60,6 +60,18 @@
                 </div>
             </div>
         </main>
+    </div>
+    <div class="second-page-container" style="display: none;">
+            <form class="add-transaction-form">
+                <h2>
+                    Dodaj transakcję
+                </h2>
+            <select name="transaction-type" id="transaction-type">
+                <option value="revenue">Wpływy</option>
+                <option value="expense">Wydatki</option>
+            </select>
+            <select name="transaction-kind" id="transaction-kind"></select>
+            <input type="number" min="0" name="amount" id="amount"></form>
     </div>
     </div>
 

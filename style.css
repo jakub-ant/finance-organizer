@@ -7,22 +7,28 @@
 }
 
 html {
-    box-sizing: border-box;
     font-family: var(--font-family);
     font-size: var(--font-size);
     color: var(--font-color);
     background-color: var(--background-color);
-}
+ }
+
+
 
 * {
     margin: 0;
-    padding: 0;
+    padding: 0;    
+    box-sizing: border-box;
 }
 
+.opaque {
+    opacity: 0.1;
+} 
+ 
 .first-page-container {
     max-width: 1000px;
     margin: 0 auto;
-}
+ }
 
 .scalable {
     transition: 0.2s;
@@ -37,8 +43,9 @@ html {
     transition: 0.2s;
 
 }
+
 .darken:hover {
-    background-color: var(--darkened-background-color);   
+    background-color: var(--darkened-background-color);
 }
 
 .header {
@@ -144,3 +151,51 @@ main {
 .style-dark {
     background-color: var(--font-color);
 }
+
+.second-page-container {
+    left: 50%;
+    top: 50%;
+    height: 500px;
+    width: 400px;
+    background-color: rgb(212, 212, 182);
+    position: fixed;
+    border-radius: 5%;
+    transform: translate(-50%, -50%);
+}
+
+
+.add-transaction-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #transaction-type, #transaction-kind{
+      width: 150px;
+  }
+
+ .add-transaction-form select, input {
+    font-size: 2rem;
+    padding: 1rem;
+    border-radius: 3%;
+    border: var(--font-color) 2px solid;
+    outline: none;
+    border: 1px solid #DDDDDD;
+ }
+ .add-transaction-form   input {
+     width: 300px;
+     margin: 2rem 0 0 0;
+     transition: 0.1s;
+ }
+
+ .add-transaction-form select:focus, input:focus{
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+ }
+
+
+.add-transaction-form h2 {
+    flex-grow: 1;
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 5rem;
+} 
