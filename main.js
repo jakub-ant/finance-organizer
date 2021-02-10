@@ -1,8 +1,12 @@
+const root = document.documentElement;
 const transactionTypeSelect = document.querySelector("#transaction-type")
 const transactionKindSelect = document.querySelector("#transaction-kind")
 const firstPageContainer = document.querySelector(".first-page-container")
 const secondPageContainer = document.querySelector(".second-page-container")
 const addTransaction = document.querySelector(".add-transaction")
+const styleWhite = document.querySelector(".style-white")
+const styleDark = document.querySelector(".style-dark")
+
 let editMode = false
 
 const transactionOptions = {
@@ -27,6 +31,8 @@ const transactionOptions = {
         en: 'credit'
     }]
 }
+
+
 
 function clearSelect() {
     transactionKindSelect.querySelectorAll('option').forEach(option => option.remove())
@@ -60,37 +66,56 @@ const setOptions = () => {
 setOptions()
 
 
- function showAddTransaction() {
+function showAddTransaction() {
     function add() {
         firstPageContainer.classList.add('opaque')
         secondPageContainer.style.display = "block"
         editMode = true
     }
     add()
-    function addListener() {document.addEventListener('click', detectClickOutsideSecondContainer)}
+
+    function addListener() {
+        document.addEventListener('click', detectClickOutsideSecondContainer)
+    }
     setTimeout(addListener, 100)
 }
 
-const hideAddTransaction = ()=>{
+const hideAddTransaction = () => {
     firstPageContainer.classList.remove('opaque');
     secondPageContainer.style.display = "none";
     editMode = false
-    document.removeEventListener('click',detectClickOutsideSecondContainer)
+    document.removeEventListener('click', detectClickOutsideSecondContainer)
 }
 
 transactionTypeSelect.addEventListener('change', setOptions)
 
-function detectClickOutsideSecondContainer (e){
-    if(!editMode) return
+function detectClickOutsideSecondContainer(e) {
+    if (!editMode) return
     const classList = [];
-    e.path.forEach(path=>{
-        if(path.className===undefined) return
+    e.path.forEach(path => {
+        if (path.className === undefined) return
         const classNames = path.className.split(' ');
-        classNames.forEach(className=>classList.push(className))
+        classNames.forEach(className => classList.push(className))
     })
-    if(!classList.includes('second-page-container')) hideAddTransaction()
+    if (!classList.includes('second-page-container')) hideAddTransaction()
 }
 
 
 
 addTransaction.addEventListener('click', showAddTransaction)
+
+
+styleWhite.addEventListener('click', () => {
+    setTimeout(() => {
+        root.style.setProperty('--font-color', "rgb(24, 20, 20)");
+        root.style.setProperty('--background-color', "rgb(236, 236, 225)");
+    }, 50)
+
+})
+
+styleDark.addEventListener('click', () => {
+    setTimeout(() => {
+        root.style.setProperty('--font-color', "rgb(200, 200, 200)");
+        root.style.setProperty('--background-color', "rgb(24, 20, 20)");
+    }, 50)
+})
