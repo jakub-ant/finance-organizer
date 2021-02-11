@@ -25,31 +25,25 @@
                     <div class="revenues darken">
                         <h3>Wpływy</h3>
                         <ul id="revenuesList">
-                            <li class="transaction-list-element">
-                                <i class="fas fa-money-bill-wave-alt"></i> <span>Typ</span> <span>Wartość: </span><span>1000</span>
-                            </li>
                         </ul>
                     </div>
                     <div class="expenses darken">
                         <h3>Wydatki</h3>
                         <ul id="expensesList">
-                            <li class="transaction-list-element">
-                                <i class="fas fa-money-bill-wave-alt"></i> <span>Typ</span> <span>Wartość: </span><span>1000</span>
-                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="account">
                 <h3>Dostępne środki:</h3>
-                <h5><span>0</span> PLN</h5>
+                <h5><span id="available-money">0</span> PLN</h5>
                 <div class="user-panel">
                     <div class="transaction-actions">
-                        <div class="add-transaction scalable darken" onclick="" >
-                            <p>+ Dodaj tranzakcję</p>
+                        <div class="add-transaction scalable darken"  >
+                            <a>+ Dodaj tranzakcję</a>
                         </div>
                         <div class="delete-all scalable darken">
-                            <p><i class="fas fa-trash-alt"></i> Usuń wszystko</p>
+                            <a><i class="fas fa-trash-alt"></i> Usuń wszystko</a>
                         </div>
                     </div>
                     <h3>Wybierz styl</h3>
@@ -71,7 +65,7 @@
                 <option value="expense">Wydatki</option>
             </select>
             <select name="transaction-kind" id="transaction-kind"></select>
-            <input type="number" min="0" name="amount" id="amount">
+            <input type="number" min="0" name="amount" id="amount" value=0>
             <button class="add-position">Dodaj</button>
         </form>
     </div>

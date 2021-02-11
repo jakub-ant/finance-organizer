@@ -11,14 +11,15 @@ const revenuesList = document.querySelector("#revenuesList")
 const expensesList = document.querySelector("#expensesList")
 const addPosition = document.querySelector('.add-position')
 const deleteAll = document.querySelector('.delete-all')
+const availableMoney = document.querySelector('#available-money')
 
 let editMode = false
 
 class Transaction {
-    constructor(type, amount){
-        this.type=type;
-        this.amount=amount
-    } 
+    constructor(type, amount) {
+        this.type = type;
+        this.amount = amount
+    }
 }
 
 const transactionOptions = {
@@ -45,11 +46,11 @@ const transactionOptions = {
 }
 
 const transactions = {
-    expenses:[],
-    revenues:[]
+    expenses: [],
+    revenues: []
 }
 
- 
+
 function removeChildren(parent, selector) {
     parent.querySelectorAll(selector).forEach(child => child.remove())
 }
@@ -60,7 +61,7 @@ const setOptions = () => {
         const newOption = document.createElement('option');
         newOption.textContent = option.pl;
         newOption.value = option.pl;
-        newOption.dataset.englishName=option.en;
+        newOption.dataset.englishName = option.en;
         transactionKindSelect.appendChild(newOption);
     }
     // clearSelect()
@@ -82,6 +83,7 @@ const setOptions = () => {
     }
 }
 setOptions()
+
 function showAddTransaction() {
     function add() {
         firstPageContainer.classList.add('opaque')
@@ -115,9 +117,9 @@ function detectClickOutsideSecondContainer(e) {
     if (!classList.includes('second-page-container')) hideAddTransaction()
 }
 
-function renderTransactions(){
-    function createLi(type, amount){
-        const newLi  = document.createElement('li')
+function renderTransactions() {
+    function createLi(type, amount) {
+        const newLi = document.createElement('li')
         newLi.classList.add("transaction-list-element")
         newLi.innerHTML = `<i class="fas fa-money-bill-wave-alt"></i> <span>${type}</span> <span>Wartość: </span><span>${amount}</span>`
         return newLi
@@ -125,17 +127,54 @@ function renderTransactions(){
     removeChildren(expensesList, 'li')
     removeChildren(revenuesList, 'li')
 
-    transactions.expenses.forEach(el=>{
+    transactions.expenses.forEach(el => {
         const newLi = createLi(el.type, el.amount)
         expensesList.appendChild(newLi)
     })
-    transactions.revenues.forEach(el=>{
+    transactions.revenues.forEach(el => {
         const newLi = createLi(el.type, el.amount)
         revenuesList.appendChild(newLi)
     })
+    availableMoney.textContent = sumTransactions()
+
+}
+renderTransactions()
+
+function addNewTransaction(transactionType, transactionKind, amount) {
+
+    switch (transactionType) {
+        case 'revenue':
+            transactions.revenues.push(new Transaction(transactionKind, amount))
+            break;
+        case 'expense':
+            transactions.expenses.push(new Transaction(transactionKind, amount))
+            break;
+
+        default:
+            break;
+    }
+
+    renderTransactions()
+
 }
 
-renderTransactions()
+function deleteAllTransactions() {
+    transactions.revenues.length = 0;
+    transactions.expenses.length = 0;
+    renderTransactions()
+}
+
+function sumTransactions() {
+    let revenues = 0 ;
+    let expenses = 0 ;
+    let sum = 0;
+    transactions.revenues.forEach(obj => revenues += +obj.amount);
+    transactions.expenses.forEach(obj => expenses += +obj.amount);
+    console.log(revenues, expenses)
+
+    sum = revenues - expenses
+    return sum
+}
 
 transactionTypeSelect.addEventListener('change', setOptions)
 
@@ -156,36 +195,15 @@ styleDark.addEventListener('click', () => {
     }, 50)
 })
 
-function addNewTransaction(transactionType, transactionKind, amount){
 
-    switch (transactionType) {
-        case 'revenue':
-            transactions.revenues.push(new Transaction(transactionKind, amount))
-            break;
-        case 'expense':
-            transactions.expenses.push(new Transaction(transactionKind, amount))
-            break;
-    
-        default:
-            break;
-    }
-    
-    renderTransactions()
-   
-}
-function deleteAllTransactions(){
-    transactions.revenues.length = 0;
-    transactions.expenses.length = 0;
-    renderTransactions()
-}
 
-addPosition.addEventListener('click', (e)=>{
+addPosition.addEventListener('click', (e) => {
     e.preventDefault()
-    addNewTransaction(transactionTypeSelect.value,transactionKindSelect.value, amount.value )
+    addNewTransaction(transactionTypeSelect.value, transactionKindSelect.value, amount.value)
     hideAddTransaction()
 })
 
-deleteAll.addEventListener('click', (e)=>{
+deleteAll.addEventListener('click', (e) => {
     e.preventDefault();
     deleteAllTransactions();
 })
