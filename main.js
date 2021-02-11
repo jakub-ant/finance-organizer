@@ -10,6 +10,7 @@ const styleDark = document.querySelector(".style-dark")
 const revenuesList = document.querySelector("#revenuesList")
 const expensesList = document.querySelector("#expensesList")
 const addPosition = document.querySelector('.add-position')
+const deleteAll = document.querySelector('.delete-all')
 
 let editMode = false
 
@@ -168,13 +169,23 @@ function addNewTransaction(transactionType, transactionKind, amount){
         default:
             break;
     }
+    
     renderTransactions()
    
+}
+function deleteAllTransactions(){
+    transactions.revenues.length = 0;
+    transactions.expenses.length = 0;
+    renderTransactions()
 }
 
 addPosition.addEventListener('click', (e)=>{
     e.preventDefault()
-    console.log(e)
     addNewTransaction(transactionTypeSelect.value,transactionKindSelect.value, amount.value )
     hideAddTransaction()
+})
+
+deleteAll.addEventListener('click', (e)=>{
+    e.preventDefault();
+    deleteAllTransactions();
 })
