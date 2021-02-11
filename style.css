@@ -98,6 +98,10 @@ main {
     list-style: none;
 }
 
+.transaction-type {
+    text-transform: capitalize;
+}
+
 .account {
     border: var(--font-color) 1px solid;
 }

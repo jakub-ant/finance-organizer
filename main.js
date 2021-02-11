@@ -34,7 +34,7 @@ const transactionOptions = {
         en: 'stipend'
     }],
     expense: [{
-        pl: "zakupu",
+        pl: "zakupy",
         en: 'shopping'
     }, {
         pl: "rachunki",
@@ -121,7 +121,7 @@ function renderTransactions() {
     function createLi(type, amount) {
         const newLi = document.createElement('li')
         newLi.classList.add("transaction-list-element")
-        newLi.innerHTML = `<i class="fas fa-money-bill-wave-alt"></i> <span>${type}</span> <span>Wartość: </span><span>${amount}</span>`
+        newLi.innerHTML = `<i class="fas fa-money-bill-wave-alt"></i> <span class="transaction-type">${type};</span> <span>wartość: </span><span>${amount}</span>`
         return newLi
     }
     removeChildren(expensesList, 'li')
