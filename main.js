@@ -1,6 +1,7 @@
 const root = document.documentElement;
 const transactionTypeSelect = document.querySelector("#transaction-type")
 const transactionKindSelect = document.querySelector("#transaction-kind")
+const amount = document.querySelector('#amount')
 const firstPageContainer = document.querySelector(".first-page-container")
 const secondPageContainer = document.querySelector(".second-page-container")
 const addTransaction = document.querySelector(".add-transaction")
@@ -8,9 +9,16 @@ const styleWhite = document.querySelector(".style-white")
 const styleDark = document.querySelector(".style-dark")
 const revenuesList = document.querySelector("#revenuesList")
 const expensesList = document.querySelector("#expensesList")
-
+const addPosition = document.querySelector('.add-position')
 
 let editMode = false
+
+class Transaction {
+    constructor(type, amount){
+        this.type=type;
+        this.amount=amount
+    } 
+}
 
 const transactionOptions = {
     revenue: [{
@@ -36,8 +44,8 @@ const transactionOptions = {
 }
 
 const transactions = {
-    expenses:[{type: "kredyt", amount: 700}, {type: "shopping", amount: 200}],
-    revenues:[{type: "wypłata", amount: 2700}, {type: "stypendium", amount: 700}]
+    expenses:[],
+    revenues:[]
 }
 
  
@@ -50,7 +58,8 @@ const setOptions = () => {
     function createOption(option) {
         const newOption = document.createElement('option');
         newOption.textContent = option.pl;
-        newOption.value = option.en;
+        newOption.value = option.pl;
+        newOption.dataset.englishName=option.en;
         transactionKindSelect.appendChild(newOption);
     }
     // clearSelect()
@@ -144,4 +153,28 @@ styleDark.addEventListener('click', () => {
         root.style.setProperty('--font-color', "rgb(200, 200, 200)");
         root.style.setProperty('--background-color', "rgb(24, 20, 20)");
     }, 50)
+})
+
+function addNewTransaction(transactionType, transactionKind, amount){
+
+    switch (transactionType) {
+        case 'revenue':
+            transactions.revenues.push(new Transaction(transactionKind, amount))
+            break;
+        case 'expense':
+            transactions.expenses.push(new Transaction(transactionKind, amount))
+            break;
+    
+        default:
+            break;
+    }
+    renderTransactions()
+   
+}
+
+addPosition.addEventListener('click', (e)=>{
+    e.preventDefault()
+    console.log(e)
+    addNewTransaction(transactionTypeSelect.value,transactionKindSelect.value, amount.value )
+    hideAddTransaction()
 })
